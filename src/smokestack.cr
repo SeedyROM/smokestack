@@ -1,11 +1,23 @@
 require "./smokestack/*"
 
-module Smokestack
-  include Factory
-
-  class Test
+macro factory(klass, &block)
+  class {{ klass }}Factory < Mock({{ klass }})
+    {{ block.body }}
   end
-
-  x = Factory(Test).new
-  puts x.get_class
 end
+
+class Person
+  property :first_name, :last_name, :age
+
+  @first_name = ""
+  @last_name = ""
+  @age = 13
+end
+
+factory Person do
+  puts "I work"
+end
+
+x = PersonFactory.new
+y = x.create
+puts typeof(y)
