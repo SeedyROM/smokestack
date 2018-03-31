@@ -19,9 +19,7 @@ class Mock(T)
     end
 
     def valid_properties
-        {% if T.instance_vars.size > 0 %}
-            compute_valid_properties
-        {% end %}
+        compute_valid_properties
     end
 
     def initialize
